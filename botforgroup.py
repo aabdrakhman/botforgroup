@@ -39,18 +39,29 @@ async def get_message(message: types.Message):
     db.insert_message(message)
 
 
+
+@dp.message_handler()
+async def send_message():
+    await bot.send_message(-759201949, 'Какие результаты за сегодняший день?)')
+
+
   
 @dp.message_handler()
 async def send_warning_message():
     if len(db.warning_message()):
         await bot.send_message(-759201949, ' , '.join(db.warning_message())+' За неделю от вас не было сообщений')
     
+    
+    
 async def scheduler():
-    aioschedule.every().day.at("08:00").do(send_warning_message)
-    aioschedule.every().day.at("08:00").do(kick_member)
+    aioschedule.every().day.at("05:00").do(send_warning_message)
+    aioschedule.every().day.at("05:00").do(kick_member)
+    aioschedule.every().day.at("17:00").do(send_message)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
+
+
 
 async def on_startup(dp): 
     asyncio.create_task(scheduler())
