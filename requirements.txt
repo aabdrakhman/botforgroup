@@ -1,5 +1,4 @@
 aiogram
 asyncio
-os
 aioschedule
 sqlite3
