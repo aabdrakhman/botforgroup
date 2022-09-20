@@ -2,4 +2,4 @@ aiogram
 asyncio
 aioschedule
 python-dotenv
-python-sqlite_db
+sqlite_db.py
