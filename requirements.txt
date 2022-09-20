@@ -1,7 +1,8 @@
 aiogram
+aiogram.types
 asyncio
 dotenv
 aioschedule
 os
-sqlite_db
+sqlite3
 logging
