@@ -1,0 +1,7 @@
+aiogram
+asyncio
+dotenv
+aioschedule
+os
+sqlite_db
+logging
