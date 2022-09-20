@@ -2,6 +2,4 @@ aiogram
 asyncio
 dotenv
 aioschedule
-os
 sqlite3
-logging
