@@ -1,1 +1,1 @@
-web: python botforgroup.py
+worker: python botforgroup.py
