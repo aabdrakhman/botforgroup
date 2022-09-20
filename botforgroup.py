@@ -33,6 +33,12 @@ async def send_welcome(message: types.Message):
     await message.reply("Hi!\nI'm BotForGroup!")
 
 
+
+@dp.message_handler()
+async def get_message(message: types.Message):
+    db.insert_message(message)
+
+
   
 @dp.message_handler()
 async def send_warning_message():
@@ -58,11 +64,6 @@ async def kick_member():
             await bot.kick_chat_member(-759201949, i)
 
 
-    
-@dp.message_handler()
-async def get_message(message: types.Message):
-    db.insert_message(message)
-
-
+   
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
+    executor.start_polling(dp, skip_updates=True)
