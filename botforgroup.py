@@ -42,7 +42,7 @@ async def get_message(message: types.Message):
 
 @dp.message_handler()
 async def send_message():
-    await bot.send_message(-759201949, 'Какие результаты за сегодняший день?)')
+    await bot.send_message(-759201949, 'Какие результаты за сегодняшний день?)')
 
 
   

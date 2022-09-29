@@ -2,4 +2,4 @@ aiogram
 asyncio
 aioschedule
 python-dotenv
-pysqlite3
+psycopg2
