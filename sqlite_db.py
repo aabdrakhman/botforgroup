@@ -9,13 +9,16 @@ class DBHelper:
     def insert_message(self, message):
         conn = psycopg2.connect(DATABASE_URL, sslmode="require")
         cur = conn.cursor()
-        cur.execute("SELECT user_id FROM users WHERE user_id=(%s)", (message.from_user.id))
+        sql_query = """SELECT user_id FROM users WHERE user_id=(%s)"""
+        cur.execute(sql_query, (message.from_user.id))
         data = cur.fetchone()
-        if data is None:  
-            cur.execute("INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)",(message.from_user.id, message.from_user.username, message.text, message.date))
+        if data is None:
+            sql_insert = """INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)"""
+            cur.execute(sql_insert,(message.from_user.id, message.from_user.username, message.text, message.date))
             conn.commit()
         else:
-            cur.execute("UPDATE users SET last_message = %s, last_message_date = %s WHERE user_id = %s", (message.text, message.date, message.from_user.id))
+            sql_update = """UPDATE users SET last_message = %s, last_message_date = %s WHERE user_id = %s"""
+            cur.execute(sql_update, (message.text, message.date, message.from_user.id))
             conn.commit()
 
 
