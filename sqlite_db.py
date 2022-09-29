@@ -13,7 +13,7 @@ class DBHelper:
         cur.execute(sql_query, (message.from_user.id,))
         data = cur.fetchone()
         if data is None:
-            sql_insert = """INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)"""
+            sql_insert = "INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)"
             record_insert = (message.from_user.id, message.from_user.username, message.text, message.date)
             cur.execute(sql_insert, record_insert)
             conn.commit()
