@@ -17,7 +17,7 @@ class DBHelper:
             cur.execute("INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)", (message.from_user.id, message.from_user.username, message.text, message.date))
             conn.commit()
         else:
-            cur.execute(f"UPDATE users SET last_message = {message.text}, last_message_date = {message.date} WHERE user_id = {message.from_user.id}")
+            cur.execute("UPDATE users SET last_message = ?, last_message_date = ? WHERE user_id = ?", (message.text, message.date, message.from_user.id))
             conn.commit()
 
 
