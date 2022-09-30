@@ -25,7 +25,7 @@ class DBHelper:
     def warning_message(*args):
         conn = psycopg2.connect(db_url, sslmode="require")
         cur = conn.cursor()
-        cur.execute("SELECT chatuser.user_name, NOW()::date-last_message_date AS day FROM chatuser LEFT JOIN users USING(user_id) WHERE day=0")
+        cur.execute("SELECT chatuser.user_name FROM chatuser LEFT JOIN users USING(user_id) WHERE NOW()::date-last_message_date=0")
         row = cur.fetchall()
         conn.commit()
         mass = []
@@ -38,7 +38,7 @@ class DBHelper:
     def kick_member_query(*args):
         conn = psycopg2.connect(db_url, sslmode="require")
         cur = conn.cursor()
-        cur.execute("SELECT chatuser.user_id, NOW()::date-last_message_date AS day FROM chatuser LEFT JOIN users USING(user_id) WHERE day>9")
+        cur.execute("SELECT chatuser.user_id FROM chatuser LEFT JOIN users USING(user_id) WHERE NOW()::date-last_message_date>9")
         row = cur.fetchall()
         conn.commit()
         mass = []

@@ -54,7 +54,7 @@ async def send_warning_message():
     
     
 async def scheduler():
-    aioschedule.every().day.at("18:38").do(send_warning_message)
+    aioschedule.every().day.at("18:47").do(send_warning_message)
     aioschedule.every().day.at("05:00").do(kick_member)
     aioschedule.every().day.at("17:00").do(send_message)
     while True:
