@@ -25,7 +25,7 @@ class DBHelper:
     def warning_message(*args):
         conn = psycopg2.connect(db_url, sslmode="require")
         cur = conn.cursor()
-        cur.execute("SELECT chatuser.user_name, NOW()::date-last_message_date AS day FROM chatuser LEFT JOIN users USING(user_id) WHERE day>6")
+        cur.execute("SELECT chatuser.user_name, NOW()::date-last_message_date AS day FROM chatuser LEFT JOIN users USING(user_id) WHERE day=0")
         row = cur.fetchall()
         conn.commit()
         mass = []
