@@ -12,7 +12,7 @@ class DBHelper:
         conn = psycopg2.connect(db_url, sslmode="require")
         cur = conn.cursor()
         cur.execute(f"SELECT user_id FROM users WHERE user_id={message.from_user.id}")
-        data = cur.fetchone()[0]
+        data = cur.fetchone()
         if data is None:  
             cur.execute("INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)", (message.from_user.id, message.from_user.username, message.text, message.date))
             conn.commit()
