@@ -17,7 +17,7 @@ class DBHelper:
             cur.execute("INSERT INTO users(user_id, user_name, message_t, last_message_date) VALUES(%s, %s, %s, %s)", (message.from_user.id, message.from_user.username, message.text, message.date))
             conn.commit()
         else:
-            cur.execute("UPDATE users SET message_t = (%s), last_message_date = (%s) WHERE user_id = (%s)", (message.text, message.date, message.from_user.id))
+            cur.execute("UPDATE users SET message_t = (%s), last_message_date = (%s), user_name = (%s)  WHERE user_id = (%s)", (message.text, message.date, message.from_user.username, message.from_user.id))
             conn.commit()
 
 
@@ -25,7 +25,7 @@ class DBHelper:
     def warning_message(*args):
         conn = psycopg2.connect(db_url, sslmode="require")
         cur = conn.cursor()
-        cur.execute("SELECT chatuser.user_name FROM chatuser LEFT JOIN users USING(user_id) WHERE NOW()::date-last_message_date>6")
+        cur.execute("SELECT users.user_name FROM users RIGHT JOIN chatuser USING(user_id) WHERE NOW()::date-last_message_date>6")
         row = cur.fetchall()
         conn.commit()
         mass = []
